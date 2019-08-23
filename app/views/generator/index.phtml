@@ -1,0 +1,47 @@
+<div>
+  <?php echo $this->getContent();  ?>
+</div>
+<div>
+ <?php echo $this->tag->form("generator/objednavka"); ?>
+
+    <label>Phalcon generovaný kontaktní formulář</label>
+    </br>
+    <?php
+    // Funkce pro rendering všech elementů formuláře
+    function renderForm($form)
+    {
+      // Projdi formulář
+      foreach ($form as $element)
+      {
+        // Získej všechny vygenerované zprávy jednotlivých elementů
+        $messages = $form->getMessagesFor
+        (
+          $element->getName()
+        );
+        if (count($messages))
+        {
+          // Vytiskni každý element formuláře
+          echo '<div class="messages">';
+          foreach ($messages as $message)
+          {
+            echo $message;
+          }
+          echo '</div>';
+        }
+        echo '<p>';
+        echo '<label for='
+          . $element->getName()
+          . '>'
+          . $element->getLabel()
+          . '</label></br>';
+        echo $element;
+        echo '</p>';
+      }
+    }
+    // Vyrenderuj formulář
+    $form = new GeneratorForm();
+    renderForm($form);
+    ?>
+    <input type='submit' value='Odeslat' />
+  </form>
+ </div>

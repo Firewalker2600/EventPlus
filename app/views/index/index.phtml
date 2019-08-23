@@ -1,0 +1,14 @@
+<div class="page-header">
+    <h1>Vítejte v generátoru nabídek na firemní akce.</h1>
+</div>
+<div>
+  <?php echo $this->getContent(); ?>
+</div>
+
+<p>Pro vytvoření nabídky na míru klikněte <?php
+echo $this->tag->linkTo(
+'generator',
+'sem.'
+);
+?>
+</p>
