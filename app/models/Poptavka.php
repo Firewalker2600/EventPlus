@@ -50,7 +50,7 @@ class Poptavka extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var string
+     * @var integer
      */
     public $program_akce;
 
@@ -59,6 +59,12 @@ class Poptavka extends \Phalcon\Mvc\Model
      * @var string
      */
     public $misto_akce;
+
+    /**
+     *
+     * @var double
+     */
+    public $cena;
 
     /**
      * Validations and business logic
@@ -89,6 +95,7 @@ class Poptavka extends \Phalcon\Mvc\Model
     {
         $this->setSchema("public");
         $this->setSource("poptavka");
+        $this->belongsTo('program_akce', 'Eventy', 'id', ['alias' => 'Eventy']);
     }
 
     /**

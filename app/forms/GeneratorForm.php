@@ -64,6 +64,7 @@ class GeneratorForm extends Form
       $email->setAttributes(
         [
           'required' => 'required',
+          'type' => 'email',
           'placeholder' => 'jan.novak@vasemail.cz'
         ]
       );
@@ -102,14 +103,13 @@ class GeneratorForm extends Form
       $this->add($spolecnost);
 
     // Program
-    $program = new Select(
-      'program_akce',
-      [
-        'TymoveBubnovani' => 'Týmové bubnování',
-        'Firewalking' => 'Firewalking',
-        'Haka' => 'Haka'
-      ]
-    );
+    // vytvoř pole z modelu Eventy ve formátu id => název
+    $events = Eventy::find()->toArray();
+    foreach($events as $row => $program) {
+      $events[$program['id']]= $program['nazev'];
+      }
+    unset($events[0]);
+    $program = new Select('program_akce',$events);
     $program->setLabel('Program');
     $program->setAttributes(
       [
@@ -212,5 +212,19 @@ class GeneratorForm extends Form
       ]
     );
     $this->add($mistoAkce);
+  }
+  public function message($name)
+  {
+    if ($this->hasMessagesFor($name)) {
+      foreach ($this->getMessagesFor($name) as $message) {
+        $this->flash->error($message);
+      }
+    }
+  }
+  public function messages()
+  {
+    foreach ($this->getMessages() as $field => $message) {
+      $this->flash->error($message);
+    }
   }
 }

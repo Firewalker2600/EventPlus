@@ -4,7 +4,7 @@ class GeneratorController extends ControllerBase
 
   public function indexAction()
   {
-   $this->view->generatorForm = new GeneratorForm();
+   $this->view->form = new GeneratorForm();
    }
 
   public function objednavkaAction()
@@ -96,9 +96,9 @@ class GeneratorController extends ControllerBase
 
     return $this->dispatcher->forward(
       [
-        "controller" => "index",
-        "action"     => "index",
-      ]
+        "controller" => "nabidka",
+        "action"     => "calculate",
+        "params"     => [$poptavka->id]      ]
     );
 
 /*

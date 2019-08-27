@@ -1,6 +1,6 @@
 <?php
 
-class Objednavka extends \Phalcon\Mvc\Model
+class Eventy extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,37 +13,25 @@ class Objednavka extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $datum_akce;
+    public $nazev;
 
     /**
      *
      * @var integer
      */
-    public $pocet_osob;
+    public $fixni_cena;
 
     /**
      *
-     * @var string
+     * @var double
      */
-    public $program_akce;
+    public $variabilni_cena;
 
     /**
      *
-     * @var string
+     * @var double
      */
-    public $misto_akce;
-
-    /**
-     *
-     * @var integer
-     */
-    public $id_spolecnost;
-
-    /**
-     *
-     * @var integer
-     */
-    public $id_kontakt;
+    public $doprava;
 
     /**
      * Initialize method for model.
@@ -51,9 +39,7 @@ class Objednavka extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema("public");
-        $this->setSource("objednavka");
-        $this->belongsTo('id_kontakt', 'Kontakt', 'id', ['alias' => 'Kontakt']);
-        $this->belongsTo('id_spolecnost', 'Spolecnost', 'id', ['alias' => 'Spolecnost']);
+        $this->setSource("eventy");
     }
 
     /**
@@ -63,14 +49,14 @@ class Objednavka extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'objednavka';
+        return 'eventy';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Objednavka[]|Objednavka|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return Eventy[]|Eventy|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -81,7 +67,7 @@ class Objednavka extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Objednavka|\Phalcon\Mvc\Model\ResultInterface
+     * @return Eventy|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {
