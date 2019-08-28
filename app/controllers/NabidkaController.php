@@ -83,6 +83,7 @@ class NabidkaController extends ControllerBase
     }
     else
     {
+      $this->assets->addCss('css/nabidka.css');
       $this->view->form = new IdForm();
       $this->view->poptavka = $poptavka;
      }

@@ -1,0 +1,15 @@
+h1.prezentace {
+  font-family: Arial, sans-serif;
+  font-size: 3rem;
+  color: #535353;
+}
+p.prezentace {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  color: #535353;
+}
+.penize {
+  height: 652px;
+  background-image: url("../img/bankovky.jpeg");
+  background-position: 500px -200px;
+}
