@@ -11,7 +11,7 @@ use Phalcon\Validation;
 use Phalcon\Validation\Validator\Numericality;
 use Phalcon\Validation\Validator\Callback;
 
-class GeneratorForm extends Form
+class GeneratorForm extends MyForm
 {
   public function initialize()
   {
@@ -212,19 +212,5 @@ class GeneratorForm extends Form
       ]
     );
     $this->add($mistoAkce);
-  }
-  public function message($name)
-  {
-    if ($this->hasMessagesFor($name)) {
-      foreach ($this->getMessagesFor($name) as $message) {
-        $this->flash->error($message);
-      }
-    }
-  }
-  public function messages()
-  {
-    foreach ($this->getMessages() as $field => $message) {
-      $this->flash->error($message);
-    }
   }
 }

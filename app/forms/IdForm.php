@@ -5,22 +5,22 @@ use Phalcon\Forms\Element\Numeric;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Numericality;
 
-class IdForm extends Form
+class IdForm extends MyForm
 {
     public function initialize()
     {
         // Id poptavky
-        $id = new Numeric('id');
+        $id = new Numeric('id',
+          [
+            'min' => 1,
+            'placeholder' => 'Zadejte ID'
+          ]
+        );
         $id->setLabel('Id poptávky');
         $id->setFilters('absint');
         $id->addValidators(
             [
-                new PresenceOf(
-                    [
-                        'message' => 'Bez id nic nevygeneruju',
-                    ]
-                ),
-              new Numericality(
+             new Numericality(
                 [
                   'message' => 'Zadejte platné ID',
                 ]
