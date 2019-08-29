@@ -45,6 +45,7 @@
              </tr>
              <tr>
                <td>
+               &nbsp{{link_to('users/form', 'Registrace')}}
                </td>
                <td>
                   &nbsp{{link_to('users/renew', 'Zapoměli jste heslo?')}}
