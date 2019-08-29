@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style = 'padding: 30px'>
         {{ link_to(null, 'class': 'brand', 'Objednávka')}}
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
@@ -24,14 +24,18 @@
 
           </ul>
 
+           {%- if logged_in is defined and not(logged_in is empty) -%}
           <ul class="navbar-nav ml-auto">
-            {%- if logged_in is defined and not(logged_in is empty) -%}
             <li class = "nav-item">{{ link_to('users', 'Users Panel') }}</li>
             <li class = "nav-item">{{ link_to('session/logout', 'Logout') }}</li>
-            {% else %}
-            <li class = "nav-item">{{ link_to('session/login', 'Login') }}</li>
-            {% endif %}
           </ul>
+            {% else %}
+           {{ form("session/login", 'class':'form-inline')}}
+             {{LogForm.render('login', ['class': 'form-control', 'style':'margin: 0px 10px'])}}
+             {{LogForm.render('heslo', ['class': 'form-control', 'style':'margin: 0px 10px'])}}
+             {{submit_button("Login", "class": "btn")}}
+           </form>
+            {% endif %}
       </div>
 </nav>
 

@@ -15,6 +15,7 @@ class LoginForm extends MyForm
     $login->setAttributes(
       [
         'required' => 'required',
+        'placeholder' => 'login'
       ]
     );
 
@@ -32,6 +33,12 @@ class LoginForm extends MyForm
     // Heslo
     $password = new Password('heslo');
     $password->setLabel('Heslo');
+    $password->setAttributes(
+      [
+      'placeholder' => 'heslo',
+      'required' => 'required'
+      ]
+    );
     $password->addValidators(
       [
         new PresenceOf(
