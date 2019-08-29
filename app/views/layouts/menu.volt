@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style = 'padding: 30px'>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style = 'padding: 5px 15px 10px; border-radius: 15px'>
         {{ link_to(null, 'class': 'brand', 'Objednávka')}}
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
@@ -24,18 +24,37 @@
 
           </ul>
 
-           {%- if logged_in is defined and not(logged_in is empty) -%}
+          {%- if logged_in is defined and not(logged_in is empty) -%}
           <ul class="navbar-nav ml-auto">
             <li class = "nav-item">{{ link_to('users', 'Users Panel') }}</li>
             <li class = "nav-item">{{ link_to('session/logout', 'Logout') }}</li>
           </ul>
-            {% else %}
-           {{ form("session/login", 'class':'form-inline')}}
-             {{LogForm.render('login', ['class': 'form-control', 'style':'margin: 0px 10px'])}}
-             {{LogForm.render('heslo', ['class': 'form-control', 'style':'margin: 0px 10px'])}}
-             {{submit_button("Login", "class": "btn")}}
-           </form>
-            {% endif %}
+          {% else %}
+          {{ form("session/login", 'class':'form-inline')}}
+          <table style = 'margin: 15px 0px 0px 0px'>
+           <tr>
+              <td>
+                 {{LogForm.render('login', ['class': 'form-control'])}}
+               </td>
+               <td>
+                 {{LogForm.render('heslo', ['class': 'form-control'])}}
+               </td>
+               <td>
+                 {{submit_button("Login", "class": "btn")}}
+               </td>
+             </tr>
+             <tr>
+               <td>
+               </td>
+               <td>
+                  &nbsp{{link_to('users/renew', 'Zapoměli jste heslo?')}}
+               </td>
+               <td>
+               </td>
+             </tr>
+           </table>
+          </form>
+          {% endif %}
       </div>
 </nav>
 
