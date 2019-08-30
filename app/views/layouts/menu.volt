@@ -26,11 +26,11 @@
 
           {%- if logged_in is defined and not(logged_in is empty) -%}
           <ul class="navbar-nav ml-auto">
-            <li class = "nav-item">{{ link_to('users', 'Users Panel') }}</li>
+            <li class = "nav-item">{{ link_to('users', 'Administrace') }}</li>
             <li class = "nav-item">{{ link_to('session/logout', 'Logout') }}</li>
           </ul>
           {% else %}
-          {{ form("session/login", 'class':'form-inline')}}
+          {{ form('session/login', 'class':'form-inline')}}
           <table style = 'margin: 15px 0px 0px 0px'>
            <tr>
               <td>

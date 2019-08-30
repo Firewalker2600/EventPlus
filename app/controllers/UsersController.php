@@ -4,12 +4,50 @@ class UsersController extends ControllerBase
 {
   public function indexAction()
   {
+    //Get session info
+    $auth = $this->session->get('auth');
 
+    //Query the active user
+    $user = Users::findFirst($auth['id']);
+    if ($user == false) {
+      return $this->dispatcher->forward(
+        [
+          "controller" => "index",
+          "action"     => "index",
+        ]
+      );
+    }
+
+    if (!$this->request->isPost()) {
+      $this->tag->setDefault('jmeno', $user->jmeno);
+      $this->tag->setDefault('prijmeni', $user->prijmeni);
+      $this->tag->setDefault('email', $user->email);
+      $this->tag->setDefault('spolecnost', $user->spolecnost);
+
+    } else {
+      $user->jmeno = $this->request->getPost('jmeno', ['string', 'striptags']);
+      $user->prijmeni = $this->request->getPost('prijmeni', ['string', 'striptags']);
+      $user->spolecnost = $this->request->getPost('spolecnost', ['string', 'striptags']);
+      $user->email = $this->request->getPost('email', 'email');
+
+      if ($user->save() == false) {
+        foreach ($user->getMessages() as $message) {
+          $this->flash->error(
+            (string) $message
+          );
+        }
+      } else {
+        $this->flash->success(
+          'Váš profil byl úspěšně aktualizován'
+        );
+      }
+    }
   }
   public function renewAction()
   {
     $this->view->form = new RenewForm;
   }
+
   public function formAction()
   {
     $this->view->form = new RegisterForm;
