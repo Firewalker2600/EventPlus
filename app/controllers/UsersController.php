@@ -56,6 +56,8 @@ class UsersController extends ControllerBase
         ]
       );
     }
+    // hash hesla do databáze
+    $user->heslo = $this->security->hash($user->heslo);
 
     //uložení do databáze - kontrola
     if ($user->save() == false) {
