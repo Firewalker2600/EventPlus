@@ -11,25 +11,30 @@
 <fieldset>
 
 <div class="row justify-content-around">
-  {% for element in form %}
-  <div class = "col-5">
-    <div class = "form-group" >
-                {{ element.label( ['class': 'control-label']) }}
+  <div class = "col-5 form-group">
+        {{ form.label('jmeno', ['class': 'control-label']) }}
+        {{ form.render('jmeno', ['class': 'form-control']) }}
+        {{ form.label('prijmeni', ['class': 'control-label']) }}
+        {{ form.render('prijmeni', ['class': 'form-control']) }}
+        {{ form.label('spolecnost', ['class': 'control-label']) }}
+        {{ form.render('spolecnost', ['class': 'form-control']) }}
+  </div>
+  <div class = "col-5 form-group">
+        {{ form.label('email', ['class': 'control-label']) }}
+        {{ form.render('email', ['class': 'form-control']) }}
+        {{ form.label('heslo', ['class': 'control-label']) }}
+        {{ form.render('heslo', ['class': 'form-control']) }}
+        {{ form.label('passCheck', ['class': 'control-label']) }}
+        {{ form.render('passCheck', ['class': 'form-control']) }}
+  </div>
+</div>
 
-        <div class = "control" >
-        {{ element.render( ['class': 'form-control']) }}
-        </div>
-    </div>
-    </div>
-  {% endfor %}
-</div>
 <div class = "row  justify-content-center" >
-<div class = "col-11">
-<div class = "control-group" >
+  <div class = "col-11 control-group">
     {{ submit_button("Zaregistrovat se", "class": "btn btn-primary btn-block") }}
-    </div>
-</div>
+  </div>
 </div>
 </fieldset>
 
 </form>
+</div>
