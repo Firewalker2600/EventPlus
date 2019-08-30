@@ -9,6 +9,7 @@ class SessionController extends ControllerBase
 {
   public function initialize()
   {
+    $this->view->setTemplateAfter('menu');
     parent::initialize();
   }
 

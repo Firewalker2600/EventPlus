@@ -24,10 +24,10 @@
 
           </ul>
 
-          {%- if logged_in is defined and not(logged_in is empty) -%}
+          {%- if session.has('auth') -%}
           <ul class="navbar-nav ml-auto">
-            <li class = "nav-item">{{ link_to('users', 'Administrace') }}</li>
-            <li class = "nav-item">{{ link_to('session/logout', 'Logout') }}</li>
+            <li class = "nav-item">{{ link_to('users', 'Administrace', 'class':'nav-link') }}</li>
+            <li class = "nav-item">{{ link_to('session/logout', 'Logout', 'class':'nav-link') }}</li>
           </ul>
           {% else %}
           {{ form('session/login', 'class':'form-inline')}}
