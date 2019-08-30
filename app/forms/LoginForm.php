@@ -3,32 +3,38 @@
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Email;
 
 class LoginForm extends MyForm
 {
   public function initialize()
   {
     // Login
-    $login = new Text('login');
-    $login->setLabel('Login');
-    $login->setFilters(['striptags', 'string']);
-    $login->setAttributes(
+    $email = new Text('email');
+    $email->setLabel('Email');
+    $email->setFilters(['striptags', 'string']);
+    $email->setAttributes(
       [
         'required' => 'required',
-        'placeholder' => 'login'
+        'placeholder' => 'email'
       ]
     );
 
-    $login->addValidators(
+    $email->addValidators(
       [
         new PresenceOf(
           [
-            'message' => 'Jméno je vyžadováno.',
+            'message' => 'email je vyžadován.',
           ]
         ),
-      ]
+        new Email(
+          [
+            'message' =>'email není platný',
+          ]
+        )
+       ]
     );
-    $this->add($login);
+    $this->add($email);
 
     // Heslo
     $password = new Password('heslo');

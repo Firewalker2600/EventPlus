@@ -43,7 +43,7 @@ class UsersController extends ControllerBase
       );
     }
 
-    //kontrola duplicit v Databázi
+    // kontrola duplicit v Databázi
     $vypis = Users::findFirstByEmail($data['email']);
     if (!empty($vypis)){
       $message = 'Uživatel s tímto emailem již je v systému uložena';
@@ -56,8 +56,6 @@ class UsersController extends ControllerBase
         ]
       );
     }
-
-
 
     //uložení do databáze - kontrola
     if ($user->save() == false) {

@@ -34,7 +34,7 @@
           <table style = 'margin: 15px 0px 0px 0px'>
            <tr>
               <td>
-                 {{LogForm.render('login', ['class': 'form-control'])}}
+                 {{LogForm.render('email', ['class': 'form-control'])}}
                </td>
                <td>
                  {{LogForm.render('heslo', ['class': 'form-control'])}}
