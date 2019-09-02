@@ -34,15 +34,13 @@ class EventsController extends ControllerBase
     }
   }
 
-  /*public function saveAction()
+  public function saveAction($id = NULL)
   {
-      $event = new Eventy();
+      if ( isset($id)) { $event = Eventy::findFirstById($id);}
+      else { $event = new Eventy();}
       $event->nazev = $this->request->getPost('nazev', ['string', 'striptags']);
       $event->fixni_cena = $this->request->getPost('fixni_cena', 'absint');
-      $event->variabilni_cena = $this->request->getPost(
-        'vyriabilni_cena',
-        'absint'
-      );
+      $event->variabilni_cena = $this->request->getPost('variabilni_cena', 'absint');
       $event->doprava = $this->request->getPost('doprava', 'absint');
 
       if ($event->save() == false) {
@@ -52,8 +50,15 @@ class EventsController extends ControllerBase
       }
       else {
         $this->flashSession->success('Váš event byl úspěšně aktualizován');
-      }
-    }*/
+        }
+    $this->dispatcher->forward(
+      [
+        'controller' => 'events',
+        'action' => 'index',
+        'params' => [$event->id],
+      ]
+    );
+    }
 }
 
 

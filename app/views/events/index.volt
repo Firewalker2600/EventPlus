@@ -9,7 +9,7 @@
 
 <div class="row justify-content-center">
   <div class = "col-4 form-group">
-        {{ form("events/save" ~ id) }}
+        {{ form("events/save/" ~ id) }}
     <fieldset>
         {{ form.label('nazev', ['class': 'control-label']) }}
         {{ form.render('nazev', ['class': 'form-control']) }}
@@ -40,6 +40,7 @@
   </ul>
   </div>
 </div>
+    {{ flashSession.output()}}
 </div>
 
 
