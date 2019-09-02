@@ -1,48 +1,37 @@
-
 {{ content() }}
+<div class="container">
 
-<div class="profile left">
-    {{ form('user/index', 'id': 'profileForm', 'onbeforesubmit': 'return false') }}
-        <div class="clearfix">
-            <label for="jmeno">Vaše jméno:</label>
-            <div class="input">
-                {{ text_field("jmeno", "size": "30", "class": "span6") }}
-                <div class="alert" id="name_alert">
-                    <strong>Varování!</strong> Prosím zadejte vaše jméno
-                </div>
-            </div>
-        </div>
-        <div class="clearfix">
-                    <label for="prijmeni">Vaše příjmení:</label>
-                    <div class="input">
-                        {{ text_field("prijmeni", "size": "30", "class": "span6") }}
-                        <div class="alert" id="name_alert">
-                            <strong>Varování!</strong> Prosím zadejte vaše příjmení
-                        </div>
-                    </div>
-                </div>
-        <div class="clearfix">
-            <label for="email">Váš email:</label>
-            <div class="input">
-                {{ text_field("email", "size": "30", "class": "span6") }}
-                <div class="alert" id="email_alert">
-                    <strong>Varování</strong> Prosím zadejte váš email
-                </div>
-            </div>
-        </div>
-        <div class="clearfix">
-                    <label for="spolecnost">Váše společnost:</label>
-                    <div class="input">
-                        {{ text_field("spolecnost", "size": "30", "class": "span6") }}
-                        <div class="alert" id="email_alert">
-                            <strong>Varování</strong> Prosím vyplňte vaší společnost
-                        </div>
-                    </div>
-                </div>
-        <div class="clearfix">
-            {{ submit_button("Aktualizovat", "class": "btn btn-primary btn-large btn-info mt-2") }}
+{{ form("users/index") }}
+<div class = "row justify-content-around">
+  <h2>Editace profilu</h2>
 
-            &nbsp;
-        </div>
-    </form>
+{{ form.messages() }}
+</div>
+
+<fieldset>
+
+<div class="row justify-content-around">
+  <div class = "col-5 form-group">
+        {{ form.label('jmeno', ['class': 'control-label']) }}
+        {{ form.render('jmeno', ['class': 'form-control']) }}
+        {{ form.label('prijmeni', ['class': 'control-label mt-2']) }}
+        {{ form.render('prijmeni', ['class': 'form-control']) }}
+  </div>
+  <div class = "col-5 form-group">
+        {{ form.label('email', ['class': 'control-label']) }}
+        {{ form.render('email', ['class': 'form-control']) }}
+        {{ form.label('spolecnost', ['class': 'control-label mt-2']) }}
+        {{ form.render('spolecnost', ['class': 'form-control']) }}
+  </div>
+</div>
+
+<div class = "row  justify-content-center" >
+  <div class = "col-11 control-group">
+    {{ submit_button("Uložit", "class": "btn btn-primary btn-block my-2 ") }}
+    {{ flashSession.output()}}
+  </div>
+</div>
+</fieldset>
+
+</form>
 </div>

@@ -67,12 +67,8 @@ class SessionController extends ControllerBase
       }
       $this->_registerSession($user);
       $this->flash->success('Uživatel ' . $user->jmeno . ' přihlášen');
-      return $this->dispatcher->forward(
-        [
-          'controller' => 'users',
-          'action' => 'index',
-        ]
-      );
+      return $this->response->redirect('users/index');
+
 
     }
   }

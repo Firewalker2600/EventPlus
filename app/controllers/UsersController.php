@@ -4,6 +4,9 @@ class UsersController extends ControllerBase
 {
   public function indexAction()
   {
+    $this->view->setTemplateBefore('tab');
+
+    $this->view->form = new RegisterForm();
     //Get session info
     $auth = $this->session->get('auth');
 
@@ -32,14 +35,10 @@ class UsersController extends ControllerBase
 
       if ($user->save() == false) {
         foreach ($user->getMessages() as $message) {
-          $this->flash->error(
-            (string) $message
-          );
+          $this->flashSession->error($message);
         }
       } else {
-        $this->flash->success(
-          'Váš profil byl úspěšně aktualizován'
-        );
+        $this->flashSession->success('Váš profil byl úspěšně aktualizován');
       }
     }
   }
@@ -70,7 +69,7 @@ class UsersController extends ControllerBase
     $data = $this->request->getPost();
     if(!$form->isValid($data, $user)) {
       foreach($form->getMessages() as $message){
-        $this->flash->error($message);
+        $this->flashSession->error($message);
       }
 
       return $this->dispatcher->forward(
@@ -85,7 +84,7 @@ class UsersController extends ControllerBase
     $vypis = Users::findFirstByEmail($data['email']);
     if (!empty($vypis)){
       $message = 'Uživatel s tímto emailem již je v systému uložena';
-      $this->flash->error($message);
+      $this->flashSession->error($message);
 
       return $this->dispatcher->forward(
         [
@@ -100,7 +99,7 @@ class UsersController extends ControllerBase
     //uložení do databáze - kontrola
     if ($user->save() == false) {
       foreach ($user->getMessages() as $message) {
-        $this->flash->error($message);
+        $this->flashSession->error($message);
       }
 
       return $this->dispatcher->forward(
@@ -111,7 +110,7 @@ class UsersController extends ControllerBase
       );
     }
     //Uložení se podařilo
-    $this->flash->success(
+    $this->flashSession->success(
       'Děkujeme za vaší registraci.'
     );
 
