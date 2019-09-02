@@ -1,9 +1,9 @@
           <ul class="nav nav-tabs mr-auto">
 
             {%- set tabs = [
-              'Profil': 'index',
+              'Profil': 'users',
               'Eventy': 'events',
-              'Poptávky': 'poptavky'
+              'Poptávky': 'index'
             ] -%}
 
             {%- for key, value in tabs %}

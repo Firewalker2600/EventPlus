@@ -83,7 +83,7 @@ class UsersController extends ControllerBase
     // kontrola duplicit v Databázi
     $vypis = Users::findFirstByEmail($data['email']);
     if (!empty($vypis)){
-      $message = 'Uživatel s tímto emailem již je v systému uložena';
+      $message = 'Uživatel s tímto emailem již je v systému uložen';
       $this->flashSession->error($message);
 
       return $this->dispatcher->forward(
