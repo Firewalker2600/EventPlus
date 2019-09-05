@@ -8,7 +8,8 @@ class ControllerBase extends Controller
   {
     $this->view->LogForm = new LoginForm();
     $this->view->setTemplateAfter('menu');
-
+    $this->assets->addCss('css/all.css');
+    $this->assets->addJs('js/all.js');
     $this->tag->prependTitle('Objednavka | ');
   }
 }

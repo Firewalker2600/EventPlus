@@ -12,10 +12,9 @@ class EventsController extends ControllerBase
   public function indexAction($id = NULL)
   {
     $events = Eventy::find()->toArray();
-    foreach ($events as $row => $program) {
-      $events[$program['id']] = $program['nazev'];
-    }
-    unset($events[0]);
+    $events = array_column($events,'nazev', 'id');
+    ksort($events);
+
     $this->view->events = $events;
     $this->view->id = $id;
 
@@ -36,8 +35,13 @@ class EventsController extends ControllerBase
 
   public function saveAction($id = NULL)
   {
-      if ( isset($id)) { $event = Eventy::findFirstById($id);}
-      else { $event = new Eventy();}
+      if ( isset($id))
+      {
+        $event = Eventy::findFirstById($id);
+      }
+      else {
+        $event = new Eventy();
+      }
       $event->nazev = $this->request->getPost('nazev', ['string', 'striptags']);
       $event->fixni_cena = $this->request->getPost('fixni_cena', 'absint');
       $event->variabilni_cena = $this->request->getPost('variabilni_cena', 'absint');
@@ -51,17 +55,32 @@ class EventsController extends ControllerBase
       else {
         $this->flashSession->success('Váš event byl úspěšně aktualizován');
         }
-    $this->dispatcher->forward(
-      [
-        'controller' => 'events',
-        'action' => 'index',
-        'params' => [$event->id],
-      ]
-    );
+      $this->response->redirect('events/index/' . $event->id);
+  }
+
+  public function deleteAction($id = null)
+  {
+    if(!isset($id))
+    {
+      $this->flashSession->error('Nebylo zadán žádný event k vymazání');
+      return $this->response->redirect ("events/index");
     }
+    else
+    {
+      $event = Eventy::findFirst($id);
+
+      if(!$event->delete())
+      {
+        $this->flashSession->error('Event se nepodařilo vymazat z databáze');
+        return $this->response->redirect ("events/index/$id");
+      }
+
+      else
+      {
+        $this->flashSession->success('Event vymazán z databáze');
+        return $this->response->redirect("events/index");
+      }
+    }
+  }
+
 }
-
-
-
-// poznámka - > myšlenka je mít napravo seznam eventů a po kliknutí se vyplní editační pole dle eventu,
-// kliknutí odešle do indexu id eventu a podle něj se vyplní políčka ve fromuláři -- možná lepší to rozdělit na save tlačítko

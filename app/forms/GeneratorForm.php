@@ -105,10 +105,8 @@ class GeneratorForm extends MyForm
     // Program
     // vytvoř pole z modelu Eventy ve formátu id => název
     $events = Eventy::find()->toArray();
-    foreach($events as $row => $program) {
-      $events[$program['id']]= $program['nazev'];
-      }
-    unset($events[0]);
+    $events = array_column($events,'nazev','id');
+    ksort($events);
     $program = new Select('program_akce',$events);
     $program->setLabel('Program');
     $program->setAttributes(
