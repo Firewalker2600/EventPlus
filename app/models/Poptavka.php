@@ -80,7 +80,7 @@ class Poptavka extends \Phalcon\Mvc\Model
             new EmailValidator(
                 [
                     'model'   => $this,
-                    'message' => 'Please enter a correct email address',
+                    'message' => 'Prosím zadejte latnou emailovou adresu.',
                 ]
             )
         );

@@ -56,20 +56,27 @@ class NabidkaController extends ControllerBase
 
   public function calculateAction($id)
   {
-      $event = Eventy::findFirstById($poptavka->program_akce);
-      // vypočítej cenu eventu
-      $cena = $event->fixni_cena + $event->variabilni_cena * $poptavka->pocet_osob;
-      $poptavka->cena = $cena;
-     if ($poptavka->save()) {
-      }
+    $poptavka = Poptavka::findFirstById($id);
+    $poptavka->cena
+      = $poptavka->eventy->variabilni_cena * $poptavka->pocet_osob
+      + $poptavka->eventy->fixni_cena;
+
+    if (!$poptavka->save())
+    {
+      $this->flashSession->error('Nepodařio se uložit cenu nabídky');
+      return $this->response->redirect('nabidka/index');
+    }
+    else
+    {
       return $this->dispatcher->forward(
         [
           "controller" => 'nabidka',
-          "action"    => 'render',
-          'params'    => [$id]
+          "action" => 'render',
+          'params' => [$id]
         ]
       );
     }
+  }
 
   public function renderAction($id)
   {
