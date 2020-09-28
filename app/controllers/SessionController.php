@@ -7,14 +7,12 @@
  */
 class SessionController extends ControllerBase
 {
-  public function initialize()
-  {
+  public function initialize() {
     $this->view->setTemplateAfter('menu');
     parent::initialize();
   }
 
-  public function indexAction()
-  {
+  public function indexAction() {
 
   }
 
@@ -23,8 +21,7 @@ class SessionController extends ControllerBase
    *
    * @param Users $user
    */
-  private function _registerSession(Users $user)
-  {
+  private function _registerSession(Users $user) {
     $this->session->set(
       'auth',
       [
@@ -37,8 +34,13 @@ class SessionController extends ControllerBase
   /**
    * This action authenticate and logs an user into the application
    */
-  public function loginAction()
-  {
+  public function loginAction() {
+    $homepage = $this->dispatcher->forward(
+      [
+        'controller' => 'index',
+        'action' => 'index'
+      ]
+    );
     if ($this->request->isPost()) {
       $email = $this->request->getPost('email');
       $heslo = $this->request->getPost('heslo');
@@ -47,30 +49,19 @@ class SessionController extends ControllerBase
       // ověření že uživatel existuje
       if ($user == false) {
         $this->flash->error('Chybný email nebo heslo');
-
-        return $this->dispatcher->forward(
-          [
-            'controller' => 'index',
-            'action' => 'index'
-          ]
-        );
+        return $homepage;
       }
       // shoda hesel?
       if (!$this->security->checkHash($heslo, $user->heslo)) {
         $this->flash->error('Chybný email nebo heslo');
-        return $this->dispatcher->forward(
-          [
-            'controller' => 'index',
-            'action' => 'index'
-          ]
-        );
+        return $homepage;
       }
       $this->_registerSession($user);
       $this->flash->success('Uživatel ' . $user->jmeno . ' přihlášen');
-      return $this->response->redirect('users/index');
-
-
-    }
+      return
+        $this->response->redirect('users/index');
+    } return
+        $homepage;
   }
 
   /*
@@ -78,8 +69,7 @@ class SessionController extends ControllerBase
    *
    * @return unknown
    */
-  public function logoutAction()
-  {
+  public function logoutAction() {
     $this->session->remove('auth');
 
     $this->flash->success('Uživatel odhlášen!');

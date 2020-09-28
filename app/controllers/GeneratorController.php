@@ -51,16 +51,16 @@ class GeneratorController extends ControllerBase
            AND misto_akce   = :MistoAkce:',
         'bind' =>
           [
-            'Jmeno'        => $data['jmeno'],
-            'Prijmeni'     => $data['prijmeni'],
-            'Email'        => $data['email'],
-            'Spolecnost'   => $data['spolecnost'],
+            'Jmeno'       => $data['jmeno'],
+            'Prijmeni'    => $data['prijmeni'],
+            'Email'       => $data['email'],
+            'Spolecnost'  => $data['spolecnost'],
             'DatumAkce'   => $data['datum_akce'],
             'ProgramAkce' => $data['program_akce'],
             'PocetOsob'   => $data['pocet_osob'],
             'MistoAkce'   => $data['misto_akce'],
           ]
-        ]
+       ]
     );
     if (!empty($vypis)){
       $message = 'Zadaná poptávka je již v systému uložena';

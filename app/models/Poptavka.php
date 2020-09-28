@@ -71,8 +71,7 @@ class Poptavka extends \Phalcon\Mvc\Model
      *
      * @return boolean
      */
-    public function validation()
-    {
+    public function validation() {
         $validator = new Validation();
 
         $validator->add(
@@ -80,7 +79,7 @@ class Poptavka extends \Phalcon\Mvc\Model
             new EmailValidator(
                 [
                     'model'   => $this,
-                    'message' => 'Prosím zadejte latnou emailovou adresu.',
+                    'message' => 'Prosím zadejte platnou emailovou adresu.',
                 ]
             )
         );
@@ -91,8 +90,7 @@ class Poptavka extends \Phalcon\Mvc\Model
     /**
      * Initialize method for model.
      */
-    public function initialize()
-    {
+    public function initialize()  {
         $this->setSchema("public");
         $this->setSource("poptavka");
         $this->belongsTo('program_akce', 'Eventy', 'id', ['alias' => 'Eventy']);
@@ -103,8 +101,7 @@ class Poptavka extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
+    public function getSource() {
         return 'poptavka';
     }
 
@@ -114,8 +111,7 @@ class Poptavka extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Poptavka[]|Poptavka|\Phalcon\Mvc\Model\ResultSetInterface
      */
-    public static function find($parameters = null)
-    {
+    public static function find($parameters = null) {
         return parent::find($parameters);
     }
 
@@ -125,8 +121,7 @@ class Poptavka extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Poptavka|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirst($parameters = null)
-    {
+    public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);
     }
 

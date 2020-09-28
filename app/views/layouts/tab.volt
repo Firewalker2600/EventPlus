@@ -3,7 +3,7 @@
             {%- set tabs = [
               'Profil': 'users',
               'Eventy': 'events',
-              'Poptávky': 'index'
+              'Poptávky': 'poptavky'
             ] -%}
 
             {%- for key, value in tabs %}

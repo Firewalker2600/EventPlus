@@ -10,6 +10,6 @@ class ControllerBase extends Controller
     $this->view->setTemplateAfter('menu');
     $this->assets->addCss('css/all.css');
     $this->assets->addJs('js/all.js');
-    $this->tag->prependTitle('Objednavka | ');
+    $this->tag->prependTitle('Event + | ');
   }
 }

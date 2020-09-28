@@ -1,2 +1,7 @@
-<?php $seznam = array('Týmové bubnování', 'Firewalking', 'Haka');
-?>
+<?php
+$seznam = [
+    'Týmové bubnování'
+  , 'Firewalking'
+  , 'Haka'
+];
+
